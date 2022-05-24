@@ -1,0 +1,25 @@
+// Method 1 - Greedy Algorithm
+class Solution {
+    public int maxSubArray(int[] nums) {
+        //int pre = 0;
+        int current = 0;
+        int max = nums[0];
+        int n = nums.length;
+        if (n <= 1){
+            max = nums[0];
+        } else {
+            for (int x:nums){
+                if (current < 0){
+                    current = x;
+                    //pre = current;
+                } else {
+                    //current = pre + x;
+                    current += x;
+                    //pre = current;
+                }
+            max = Math.max(current,max);
+            }
+        }
+    return max;
+    }
+}
