@@ -1,0 +1,31 @@
+// Method 1 - Direct Solution
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] out = new int[2];
+        for (int i = 0; i < nums.length - 1; i++){
+            for (int j = i+1; j < nums.length; j++){
+                if (nums[i] + nums[j] == target){
+                    out[0] = i;
+                    out[1] = j;
+                }
+            }
+        }
+        return out;
+    }
+}
+
+// Method 2 - Hash Table
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] out = new int[2];
+        Map<Integer, Integer> hashtable = new HashMap<Integer, Integer>();
+        for (int i = 0; i < nums.length; i++){          
+            if (hashtable.containsKey(target - nums[i])){
+                out[0] = hashtable.get(target - nums[i]);
+                out[1] = i;
+            }
+            hashtable.put(nums[i], i);
+        }
+    return out;
+    }
+}
