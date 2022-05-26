@@ -1,0 +1,31 @@
+// Method 1 - HashMap
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length){
+            return intersect(nums2, nums1);
+        }
+
+        Map<Integer, Integer> HashM = new HashMap<Integer, Integer>();
+        for (int num:nums1){
+            int count = HashM.getOrDefault(num, 0) + 1;
+            HashM.put(num, count);
+        }
+
+        int[] out = new int[nums1.length];
+        int index = 0;
+        for (int num:nums2){
+            int count = HashM.getOrDefault(num, 0);
+            if (count > 0){
+                out[index++] = num;
+                count--;
+                if(count > 0){
+                    HashM.put(num, count);
+                } else {
+                    HashM.remove(num);
+                }
+            }
+        }
+
+        return Arrays.copyOfRange(out, 0, index);
+    }
+}
