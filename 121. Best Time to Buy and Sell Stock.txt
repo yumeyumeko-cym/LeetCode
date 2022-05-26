@@ -1,0 +1,34 @@
+// Method 1 - Direct Solution
+class Solution {
+    public int maxProfit(int[] prices) {
+        int out = 0;
+        for (int i = 0; i < prices.length - 1; i++){
+            for (int j = i+1; j < prices.length; j++){
+                out = Math.max(prices[j] - prices[i], out);
+            }
+        }
+
+
+        return out;
+    }
+}
+
+// Method 2 - Dynamic Programming
+class Solution {
+    public int maxProfit(int[] prices) {
+        // dp[i] = min(dp[i-1], num[i]):
+        // dp[i]表示第i天前出现的最低价格
+        // 第i天的最大收益等于第i天价格减去dp[i]
+        int[] dp = new int [prices.length];
+        dp[0] = prices[0];
+        int dailyMax = 0;
+
+        for (int i = 1; i < prices.length; i++){
+            dp[i] = Math.min(dp[i-1], prices[i]);
+            dailyMax = Math.max(prices[i] - dp[i], dailyMax);
+        }
+
+        return dailyMax;
+
+    }
+}
